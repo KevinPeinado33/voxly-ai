@@ -1,0 +1,3 @@
+minimumReleaseAgeExclude:
+  - '@react-navigation/core@7.21.2'
+  - '@react-navigation/native@7.3.4'
