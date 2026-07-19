@@ -5,8 +5,8 @@ export default function LoginScreen() {
   const { top } = useSafeAreaInsets()
 
   return (
-    <View style={{ paddingTop: top }} >
-      <Text>LoginScreen</Text>
+    <SafeAreaView edges={['top', 'bottom']}>
+      <Text className='text-2xl font-bold text-red-500'>LoginScreen</Text>
       <Button title="Login" onPress={() => console.log('Login button pressed')} />
     </View>
   )
