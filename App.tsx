@@ -1,7 +1,9 @@
 import './global.css';
 import LoginScreen from './src/features/login/screens/Login.screen';
-import { SafeAreaProvider } from 'react-native-safe-area-context';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
+import { LogOut, Zap } from 'lucide-react-native';
+import { ButtonBase } from './src/shared/components/atoms/Button';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -21,7 +23,12 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <LoginScreen />
+      {/* <LoginScreen /> */}
+      <SafeAreaView className="gap-4">
+        <ButtonBase icon={Zap} title="Continue battle" variant="primary" />
+        <ButtonBase title="Continue battle" variant="primary" />
+        <ButtonBase icon={LogOut} title="Sign out" variant="secondary" />
+      </SafeAreaView>
     </SafeAreaProvider>
   );
 }
