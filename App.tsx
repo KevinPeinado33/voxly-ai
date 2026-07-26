@@ -1,10 +1,10 @@
 import './global.css';
-import LoginScreen from './src/features/login/screens/Login.screen';
+import LoginScreen from '@/features/auth/screens/Login.screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import { LogOut, Zap } from 'lucide-react-native';
-import { ButtonBase } from './src/shared/components/atoms/Button';
-import { Chip } from './src/shared/components/atoms/Chip';
+import { ButtonBase } from '@/shared/components/atoms/Button';
+import { Chip } from '@/shared/components/atoms/Chip';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -24,17 +24,12 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      {/* <LoginScreen /> */}
-      <SafeAreaView className="gap-4">
+      <LoginScreen />
+      {/* <SafeAreaView className="gap-4">
         <ButtonBase icon={Zap} title="Continue battle" variant="primary" />
         <ButtonBase title="Continue battle" variant="primary" />
         <ButtonBase icon={LogOut} title="Sign out" variant="secondary" />
-
-        <Chip
-          label="Chip"
-          onPress={() => console.log('Chip pressed')}
-        />
-      </SafeAreaView>
+      </SafeAreaView> */}
     </SafeAreaProvider>
   );
 }
