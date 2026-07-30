@@ -2,8 +2,9 @@ import './global.css';
 import LoginScreen from './src/features/login/screens/Login.screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
-import { LogOut, Zap } from 'lucide-react-native';
-import { ButtonBase } from './src/shared/components/atoms/Button';
+import { Bell, ChevronLeft, Mail, MailOpen, Mic, Pencil } from 'lucide-react-native';
+/* import { IconButtonBase } from './src/shared/components/atoms/Buttons/IconButtonBase'; */
+import { InputBase } from './src/shared/components/atoms/Inputs/InputBase';
 
 export default function App() {
   const [loaded] = useFonts({
@@ -23,12 +24,18 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      {/* <LoginScreen /> */}
-      <SafeAreaView className="gap-4">
-        <ButtonBase icon={Zap} title="Continue battle" variant="primary" />
-        <ButtonBase title="Continue battle" variant="primary" />
-        <ButtonBase icon={LogOut} title="Sign out" variant="secondary" />
+      <LoginScreen />
+      {/* <SafeAreaView className="flex-1 flex-row items-center justify-center gap-">
+        <IconButtonBase icon={Mic} variant="primary" />
+        <IconButtonBase icon={ChevronLeft} variant="secondary" />
+        <IconButtonBase icon={Bell} variant="secondary" />
+        <IconButtonBase icon={Pencil} variant="secondary" />
+      </SafeAreaView> */}
+      <SafeAreaView className="flex-1 items-center justify-center gap-4">
+        <InputBase placeholder={'Email address'} icon={Mail} />
       </SafeAreaView>
+
+
     </SafeAreaProvider>
   );
 }
