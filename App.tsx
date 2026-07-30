@@ -33,6 +33,8 @@ export default function App() {
       </SafeAreaView> */}
       <SafeAreaView className="flex-1 items-center justify-center gap-4">
         <InputBase placeholder={'Email address'} icon={Mail} />
+        <InputBase placeholder={'Email address'} icon={Mail} />
+
       </SafeAreaView>
 
 
