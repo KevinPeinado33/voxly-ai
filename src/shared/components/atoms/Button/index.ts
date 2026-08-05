@@ -1,2 +1,2 @@
-export * from './ButtonBase';
-export * from './buttonVariants';
+export { ButtonBase } from './ButtonBase';
+export { buttonVariants } from './buttonVariants';
