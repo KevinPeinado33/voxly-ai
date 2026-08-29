@@ -1,4 +1,4 @@
-import { supabase } from "@/shared";
+import { supabase } from "@voxly/config";
 
 import { mapUser } from "../mappers/user.mapper";
 import type { UserModel } from "../models/user.model";

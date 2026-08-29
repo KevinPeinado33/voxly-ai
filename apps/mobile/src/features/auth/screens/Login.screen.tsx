@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Button, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { getUsers } from '../services/getUsers.service';
-import type { UserModel } from '../models/user.model';
+import { getUsers, type UserModel } from '@voxly/core';
 
 export default function LoginScreen() {
   const { top } = useSafeAreaInsets();
