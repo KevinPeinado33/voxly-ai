@@ -14,7 +14,7 @@ voxly-ai/
 │       ├── package.json  tsconfig.json  assets/
 │       └── src/features/auth/screens/Login.screen.tsx
 ├── packages/
-│   ├── ui/                # @voxly/ui   — componentes atoms (Button, Chip, IconButton)
+│   ├── lolita-ui/                # @voxly/lolita-ui   — componentes atoms (Button, Chip, IconButton)
 │   ├── config/            # @voxly/config — cliente Supabase
 │   └── core/              # @voxly/core  — models, mappers, services de dominio
 ├── package.json           # raíz: private, scripts que delegan, devDeps compartidas
@@ -33,7 +33,7 @@ habría que añadir build + `exports`.
 flowchart TD
     A[Repo actual: 1 app Expo en la raiz] --> B[Crear apps/ y packages/]
     B --> C[git mv: app -> apps/mobile]
-    B --> D[git mv: src/shared/components/atoms -> packages/ui/src/atoms]
+    B --> D[git mv: src/shared/components/atoms -> packages/lolita-ui/src/atoms]
     B --> E[git mv: src/shared/config/supabase -> packages/config/src/supabase]
     B --> F[git mv: src/features/auth models+mappers+services -> packages/core/src]
     C --> G[package.json por paquete y app + index.ts de barril]
@@ -41,8 +41,8 @@ flowchart TD
     E --> G
     F --> G
     G --> H["pnpm-workspace.yaml: packages: apps/*, packages/*"]
-    H --> I["Reescribir imports: @/shared -> @voxly/ui | @voxly/config | @voxly/core"]
-    I --> J["tailwind.config.js: content incluye ../../packages/ui/src"]
+    H --> I["Reescribir imports: @/shared -> @voxly/lolita-ui | @voxly/config | @voxly/core"]
+    I --> J["tailwind.config.js: content incluye ../../packages/lolita-ui/src"]
     J --> K[tsconfig.base.json en la raiz + extends por paquete]
     K --> L["pnpm install en la raiz: crea symlinks workspace:*"]
     L --> M["Verificar: pnpm typecheck + pnpm start + render LoginScreen"]
@@ -56,7 +56,7 @@ flowchart TD
 
 ```mermaid
 graph TD
-    mobile["apps/mobile (Expo)"] --> ui["@voxly/ui"]
+    mobile["apps/mobile (Expo)"] --> ui["@voxly/lolita-ui"]
     mobile --> core["@voxly/core"]
     mobile --> config["@voxly/config"]
     core --> config
@@ -72,14 +72,14 @@ graph TD
 | Arrancar la app | `pnpm start` (delega en `pnpm --filter mobile start`) |
 | Typecheck de todo | `pnpm typecheck` (`pnpm -r exec tsc --noEmit`) |
 | Añadir dep a la app | `pnpm --filter mobile add <pkg>` |
-| Añadir dep a un paquete | `pnpm --filter @voxly/ui add <pkg>` |
+| Añadir dep a un paquete | `pnpm --filter @voxly/lolita-ui add <pkg>` |
 
 ## Notas / gotchas
 
 1. **NativeWind**: `content` en `apps/mobile/tailwind.config.js` debe incluir
-   `../../packages/ui/src/**` o los `className` de los componentes se purgan y
+   `../../packages/lolita-ui/src/**` o los `className` de los componentes se purgan y
    salen sin estilo.
-2. `@voxly/ui` usa clases de fuente (`font-jakarta-*`) definidas en el `theme` de
+2. `@voxly/lolita-ui` usa clases de fuente (`font-jakarta-*`) definidas en el `theme` de
    tailwind de la app → el paquete no es visualmente autónomo. Si se publica,
    mover el `theme` a un preset compartido.
 3. `pnpm` necesita `nodeLinker: hoisted` (ya en `pnpm-workspace.yaml` y `.npmrc`)
