@@ -2,7 +2,7 @@ import './global.css';
 import LoginScreen from '@/features/auth/screens/Login.screen';
 import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
-import { ButtonBase, Chip } from '@voxly/ui';
+import { ButtonBase, Chip } from '@voxly/lolita-ui';
 
 export default function App() {
   const [loaded] = useFonts({
