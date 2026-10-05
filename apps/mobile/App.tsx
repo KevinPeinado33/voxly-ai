@@ -3,11 +3,19 @@ import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 import { useFonts } from 'expo-font';
 import { getProducts } from '@/features/example/get-product';
 import { useEffect, useState } from 'react';
-import { Product } from '@/features/example/products';
-import { Text } from 'react-native';
+import { Product, ProductsAPI } from '@/features/example/products';
+import { Button, ScrollView, Text } from 'react-native';
+import LoginScreen from '@/features/auth/screens/Login.screen';
+import { getPosts } from '@/features/example/get-posts';
+import { PostsAPI } from '@/features/example/posts';
+import { CommentsAPI } from '@/features/comments';
+import { getComments } from '@/features/get-comments';
 
 export default function App() {
-  const [products, setProducts] = useState<Product[]>([]);
+  const [infoProducts, setInfoProducts] = useState<ProductsAPI>();
+  const [posts, setPosts] = useState<PostsAPI[]>([]);
+  const [showLogin, setShowLogin] = useState(false);
+  const [comments, setComments] = useState<CommentsAPI[]>([]);
 
   const [loaded] = useFonts({
     'Sora-Regular': require('./assets/fonts/Sora/Sora-Regular.ttf'),
@@ -24,10 +32,31 @@ export default function App() {
     fetchProducts();
   }, []);
 
+  useEffect(() => {
+    fetchPosts();
+  }, []);
+
+  useEffect(() => {
+    fetchComments();
+  }, []);
+
+
   const fetchProducts = async () => {
     const response = await getProducts();
-    setProducts(response);
+    setInfoProducts(response);
   };
+
+  const fetchPosts = async () => {
+    const response = await getPosts();
+    setPosts(response);
+
+  };
+
+  const fetchComments = async () => {
+    const response = await getComments();
+    setComments(response);
+  };
+
 
   if (!loaded) {
     return null;
@@ -35,15 +64,42 @@ export default function App() {
 
   return (
     <SafeAreaProvider>
-      <SafeAreaView>
+      {showLogin ? (
+        <>
+          <SafeAreaView edges={['top']}>
+            <Button title="Volver" onPress={() => setShowLogin(false)} />
+          </SafeAreaView>
+          <LoginScreen />
+        </>
+      ) : (
+        <ScrollView>
 
-        <Text>Hola Mundo</Text>
-        {products.map(product => (
-          <Text key={product.id}> {product.title} </Text>
-        ))}
-      </SafeAreaView>
 
+          <SafeAreaView>
+            <Text>Total de productos</Text>
+            {infoProducts?.products?.map(product => (
+              <Text key={product.id}> {product.title} </Text>
+            ))}
+            <Text>Total: {infoProducts?.total}</Text>
+          </SafeAreaView>
 
+          <Button title="Ir a Login" onPress={() => setShowLogin(true)} />
+
+          <SafeAreaView>
+            <Text>Total de comentarios</Text>
+            {comments.map(comment => (<Text key={comment.id}>{comment.body}</Text>))}
+          </SafeAreaView>
+
+          <SafeAreaView>
+            <Text>Total de publicaciones</Text>
+            {posts.map(post => (
+              <Text key={post.id}> {post.title}</Text>
+            ))}
+
+          </SafeAreaView>
+
+        </ScrollView>
+      )}
     </SafeAreaProvider>
   );
 }

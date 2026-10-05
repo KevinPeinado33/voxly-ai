@@ -10,9 +10,9 @@ const url = "https://dummyjson.com/products";
 export const getProducts = async () => {
     const response = await Axios.get<ProductsAPI>(url);
 
-    console.log("pruebita", response);
+    console.log("pruebitass", response);
 
-    return response.data.products;
+    return response.data;
 
 
 }

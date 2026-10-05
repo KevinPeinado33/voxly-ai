@@ -6,6 +6,7 @@ export interface PokemonApi {
 }
 
 export interface PokemonResponse {
+  name: string;
   nameRunrun: string;
   url: string;
 }
